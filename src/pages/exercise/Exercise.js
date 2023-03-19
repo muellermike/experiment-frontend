@@ -15,7 +15,7 @@ function Exercise() {
     const { participationId } = useParams();
     const [exercise, setExercise] = useState({});
     const [count, setCount] = useState(1);
-    const globalState = useSelector(state => state.userInfoState);
+    const globalState = useSelector(state => state.participationState);
     const imageState = useSelector(state => state.imageState);
 
     // lade die nächste "Aufgabe" über das API

@@ -76,8 +76,8 @@ class ExercisePresentation extends React.Component {
                         </Card.Text>
                     </Card.Body>
                     <div>
-                        {this.state.timeIsUp ? <div><p className="left-text">left</p><Card.Img className="Image-Dots" variant="bottom" src={emptyEx} /><p className="right-text">right</p></div> : 
-                            <div><p className="left-text">left</p><Card.Img className="Image-Dots" variant="bottom" src={this.props.image} /><p className="right-text">right</p></div>
+                        {this.state.timeIsUp ? <div><Card.Img className="Image-Dots" variant="bottom" src={emptyEx} /></div> : 
+                            <div><Card.Img className="Image-Dots" variant="bottom" src={this.props.image} /></div>
                         }
                     </div>
                 </Card>

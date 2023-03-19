@@ -2,7 +2,7 @@ import { useState, React, useEffect } from "react";
 import { Button, Card } from "react-bootstrap";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from 'react-redux';
-import { storeExternalUserId, storeParticipationId, storeExperimentId, storeImageTime, storeExpName } from '../../actions';
+import { storeExternalUserId, storeParticipationId, storeImageTime, storeExpName } from '../../actions';
 
 function ParticipantIdentifier() {
 
