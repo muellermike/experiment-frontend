@@ -27,7 +27,7 @@ root.render(
           <Route path="" element={<Introduction />} />
           <Route path="practise-intro" element={<PractiseIntroduction />} />
           <Route path="practise" element={<Practise />} />
-          <Route path=":experimentId/exercise" element={<Exercise />} />
+          <Route path=":participationId/exercise" element={<Exercise />} />
           <Route path="thankyou" element={<ThankYou />} />
           <Route path="error" element={<Error />} />
           <Route

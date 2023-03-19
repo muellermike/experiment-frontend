@@ -1,6 +1,6 @@
 import "./Exercise.css";
 import { Col, Container, ProgressBar, Row } from "react-bootstrap";
-import QuestionImage from "../../components/QuestionImage/QuestionImage";
+import ExercisePresentation from "../../components/ExercisePresentation/ExercisePresentation";
 import AnswerForm from "../../components/AnswerForm/AnswerForm";
 import ExperimentDescription from "../../components/ExperimentDescription/ExperimentDescription";
 import ImportantInformation from "../../components/ImportantInformation/ImportantInformation";
@@ -12,7 +12,7 @@ import { useSelector, useDispatch } from 'react-redux';
 function Exercise() {
     let navigate = useNavigate();
     const dispatch = useDispatch();
-    const { experimentId } = useParams();
+    const { participationId } = useParams();
     const [exercise, setExercise] = useState({});
     const [count, setCount] = useState(1);
     const globalState = useSelector(state => state.userInfoState);
@@ -29,7 +29,7 @@ function Exercise() {
         };
 
         // load exercise data from the API the first time
-        fetch(process.env.REACT_APP_API_BASE_URL + '/experiments/' + experimentId + '/' + globalState.userId + '/exercises/next', requestOptions)
+        fetch(process.env.REACT_APP_API_BASE_URL + '/experiment-participations/' + participationId + '/exercises/next', requestOptions)
         .then(response => {
             if(response.status !== 200) {
                 throw new Error("Server Error");
@@ -45,23 +45,23 @@ function Exercise() {
         .catch(function(err) {
             navigate("/error");
         });
-    }, [experimentId, globalState.userId, navigate, dispatch]);
+    }, [participationId, globalState.participationId, navigate, dispatch]);
 
     const handleSubmit = (answer, timeToClick, timeToSubmit) => {
         if(answer) {
-            // POST recording
+            // POST answer
             const requestOptions = {
                 mode: 'cors',
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json', 'X-API-KEY': process.env.REACT_APP_API_KEY_VALUE },
                 body: JSON.stringify({
                     answer: answer,
-                    userId: globalState.userId,
+                    experimentId: globalState.participationId,
                     time: new Date().toISOString(),
                     timeToClick: timeToClick,
                     timeToSubmit: timeToSubmit,
-                    experimentId: parseInt(experimentId),
-                    exerciseId: parseInt(exercise.id)
+                    imageId: parseInt(exercise.image.id),
+                    textId: parseInt(exercise.text.id)
                 })
             };
             fetch(process.env.REACT_APP_API_BASE_URL + '/exercises', requestOptions)
@@ -80,7 +80,7 @@ function Exercise() {
                 };
                 
                 // load next exercise data from the api
-                fetch(process.env.REACT_APP_API_BASE_URL + '/experiments/' + experimentId + '/' + globalState.userId + '/exercises/next', requestOptions)
+                fetch(process.env.REACT_APP_API_BASE_URL + '/experiment-participations/' + participationId + '/exercises/next', requestOptions)
                 .then(response => {
                     if (response.status === 204) {
                         navigate("/thankyou");
@@ -106,7 +106,7 @@ function Exercise() {
     // Daten anzeigen
     return (
         <div>
-            <h1>Dots Estimation Experiment</h1>
+            <h1>Experiment</h1>
             <Container>
                 <Row>
                     <ImportantInformation></ImportantInformation>
@@ -119,7 +119,7 @@ function Exercise() {
                 </Row>
                 <Row className="Container-Row">
                     <Col xs={12} sm={12} md={7}>
-                        <QuestionImage question={exercise.question} image={"data:" + exercise.mimeType + ";base64, " + exercise.encodedString} imageDuration={imageState.imageTime} />
+                        <ExercisePresentation text={exercise.text?.text} image={"data:" + exercise.image?.mimeType + ";base64, " + exercise.image?.encodedString} imageDuration={imageState.imageTime} />
                     </Col>
                     <Col className="Container-Col">
                         <div className="Answer-Part">

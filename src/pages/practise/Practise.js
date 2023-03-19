@@ -1,6 +1,6 @@
 import "./Practise.css";
 import { Button, Col, Container, Fade, Row } from "react-bootstrap";
-import QuestionImage from "../../components/QuestionImage/QuestionImage";
+import ExercisePresentation from "../../components/ExercisePresentation/ExercisePresentation";
 import AnswerForm from "../../components/AnswerForm/AnswerForm";
 import ExperimentDescription from "../../components/ExperimentDescription/ExperimentDescription";
 import { useState } from "react";
@@ -25,7 +25,7 @@ function Practise() {
     const [exercise, setExercise] = useState(exercises[0]);
     const [count, setCount] = useState(0);
     const [showArrow, setShowArrow] = useState(false);
-    const globalState = useSelector(state => state.userInfoState);
+    const globalState = useSelector(state => state.participationState);
     const imageState = useSelector(state => state.imageState);
 
     const handleSubmit = (answer) => {
@@ -63,7 +63,7 @@ function Practise() {
                 </Row>
                 <Row className="Container-Row">
                     <Col xs={12} sm={12} md={7}>
-                        <QuestionImage question={exercise.question} image={exercise.image} imageDuration={imageState.imageTime} />
+                        <ExercisePresentation text={exercise.text?.text} image={exercise.image} imageDuration={imageState.imageTime} />
                     </Col>
                     <Col className="Container-Col">
                         <div className="Answer-Part">

@@ -1,9 +1,9 @@
 import React from "react";
-import "./QuestionImage.css";
+import "./ExercisePresentation.css";
 import { Card } from "react-bootstrap";
 import emptyEx from "../../assets/images/empty_ex.PNG"
 
-class QuestionImage extends React.Component {
+class ExercisePresentation extends React.Component {
     constructor(props){
         super(props);
 
@@ -32,6 +32,10 @@ class QuestionImage extends React.Component {
                     timeIsUp: true
                    });
                }, this.props.imageDuration);
+
+            if(this.timer && !this.props.imageDuration) {
+                clearTimeout(this.timer);
+            }
          }
     }
 
@@ -45,6 +49,10 @@ class QuestionImage extends React.Component {
                 timeIsUp: true
                });
            }, this.props.imageDuration);
+
+        if(this.timer && !this.props.imageDuration) {
+            clearTimeout(this.timer);
+        }
     }
 
     /*
@@ -64,7 +72,7 @@ class QuestionImage extends React.Component {
                 <Card>
                     <Card.Body className="card-body-image">
                         <Card.Text>
-                            {this.props.question}
+                            {this.props.text}
                         </Card.Text>
                     </Card.Body>
                     <div>
@@ -78,4 +86,4 @@ class QuestionImage extends React.Component {
     }
 }
 
-export default QuestionImage;
+export default ExercisePresentation;
