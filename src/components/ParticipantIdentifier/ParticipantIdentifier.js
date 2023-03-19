@@ -2,7 +2,7 @@ import { useState, React, useEffect } from "react";
 import { Button, Card } from "react-bootstrap";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from 'react-redux';
-import { storeExternalUserId, storeUserId, storeExperimentId, storeImageTime, storeExpName } from '../../actions';
+import { storeExternalUserId, storeParticipationId, storeExperimentId, storeImageTime, storeExpName } from '../../actions';
 
 function ParticipantIdentifier() {
 
@@ -11,7 +11,7 @@ function ParticipantIdentifier() {
     }
     
     const [extUserId, setExtUserId] = useState("");
-    const [imgTime, setImgTime] = useState(1000);
+    const [imgTime, setImgTime] = useState(undefined);
     const [expName, setExpName] = useState("");
     let navigate = useNavigate();
     const dispatch = useDispatch();
@@ -40,11 +40,13 @@ function ParticipantIdentifier() {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'X-API-KEY': process.env.REACT_APP_API_KEY_VALUE },
             body: JSON.stringify({
-                id: extUserId
+                originId: extUserId,
+                start: new Date().toISOString(),
+                experimentName: expName
             })
         }
 
-        fetch(process.env.REACT_APP_API_BASE_URL + '/users', requestOptions)
+        fetch(process.env.REACT_APP_API_BASE_URL + '/experiment-participations', requestOptions)
             .then(response => {
                 if(response.status !== 200) {
                     throw new Error("Server Error");
@@ -53,7 +55,7 @@ function ParticipantIdentifier() {
                 return response.json();
             })
             .then(data =>  {
-                dispatch(storeUserId(data));
+                dispatch(storeParticipationId(data));
                 requestOptions.body = JSON.stringify({ 
                     user: data,
                     start: new Date().toISOString(),

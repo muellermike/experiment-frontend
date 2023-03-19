@@ -7,7 +7,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <p>
-          Dots Estimation Experiment
+          Experiment Plattform
         </p>
       </header>
       <div className="App-body">
@@ -15,7 +15,7 @@ function App() {
       </div>
       <footer className="App-footer">
         <p>
-          Thank you for your participation! Experiment provided by the University of St. Gallen and Mike Mueller © 2022.
+          Thank you for your participation! Experiment provided by the University of St. Gallen and Mike Mueller © 2023.
         </p>
       </footer>
     </div>

@@ -9,7 +9,6 @@ import allReducer from './reducers/root_reducers';
 import { Provider } from 'react-redux';
 import Exercise from "./pages/exercise/Exercise";
 import Introduction from './pages/introduction/Introduction';
-import ParticipantInfo from './pages/participant/ParticipantInfo';
 import ThankYou from './pages/thankyou/ThankYou';
 import Error from './pages/error/Error';
 import PractiseIntroduction from './pages/practise-introduction/PractiseIntroduction';
@@ -26,7 +25,6 @@ root.render(
       <Routes>
         <Route path="/" element={<Provider store={store}> <App /></Provider>}>
           <Route path="" element={<Introduction />} />
-          <Route path="participant" element={<ParticipantInfo />} />
           <Route path="practise-intro" element={<PractiseIntroduction />} />
           <Route path="practise" element={<Practise />} />
           <Route path=":experimentId/exercise" element={<Exercise />} />

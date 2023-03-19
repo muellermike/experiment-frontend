@@ -1,8 +1,8 @@
-export const storeUserId = (userId) => {
+export const storeParticipationId = (participationId) => {
     return {
-        type: 'STORE_USERID',
+        type: 'STORE_PARTICIPATIONID',
         data: {
-            userId: userId
+            participationId: participationId
         }
     };
 };

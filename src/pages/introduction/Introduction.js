@@ -8,7 +8,7 @@ function Introduction() {
     */
     return (
         <div>
-            <h1>Welcome to the Dots Estimation Experiment</h1>
+            <h1>Welcome to the Experiment</h1>
             <div>
                 <ParticipantIdentifier></ParticipantIdentifier>
             </div>

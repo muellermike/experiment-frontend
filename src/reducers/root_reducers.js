@@ -1,10 +1,10 @@
-import userInfoReducer from "./userInfo";
+import participationReducer from "./participation"
 import imageReducer from "./image";
 import experimentReducer from "./experiment";
 import { combineReducers } from "redux";
 
 const allReducer = combineReducers( {
-    userInfoState: userInfoReducer,
+    participationState: participationReducer,
     imageState: imageReducer,
     experimentState: experimentReducer
 });

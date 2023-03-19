@@ -1,15 +1,15 @@
 const initialState = {
-    userId: 0,
+    participationId: 0,
     externalUserId: "",
     experimentId: 0
 };
 
-const userInfoReducer = (state = initialState, action) => {
+const participationReducer = (state = initialState, action) => {
     switch(action.type) {
-        case "STORE_USERID":
+        case "STORE_PARTICIPATIONID":
             return {
                 ...state,
-                userId: action.data.userId
+                participationId: action.data.participationId
             };
         case "STORE_EXT_USERID":
             return {
@@ -28,4 +28,4 @@ const userInfoReducer = (state = initialState, action) => {
     }
 }
 
-export default userInfoReducer;
+export default participationReducer;
