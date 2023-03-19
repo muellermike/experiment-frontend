@@ -25,11 +25,11 @@ export const storeImageTime = (imgTime) => {
     }
 }
 
-export const storeExperimentId = (experimentId) => {
+export const storeExperimentQuestions = (questions) => {
     return {
-        type: 'STORE_EXPERIMENTID',
+        type: 'STORE_EXPERIMENTQUESTIONS',
         data: {
-            experimentId: experimentId
+            experimentQuestions: questions
         }
     }
 }
@@ -43,8 +43,8 @@ export const storeExpName = (expName) => {
     }
 }
 
-export const releaseUserInfo = () => {
+export const releaseParticipationInfo = () => {
     return {
-        type: 'RELEASE_USER_INFO'
+        type: 'RELEASE_PARTICIPATION_INFO'
     };
 };

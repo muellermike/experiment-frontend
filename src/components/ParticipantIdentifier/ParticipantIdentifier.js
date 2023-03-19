@@ -2,7 +2,7 @@ import { useState, React, useEffect } from "react";
 import { Button, Card } from "react-bootstrap";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from 'react-redux';
-import { storeExternalUserId, storeParticipationId, storeImageTime, storeExpName } from '../../actions';
+import { storeExternalUserId, storeParticipationId, storeImageTime, storeExpName, storeExperimentQuestions } from '../../actions';
 
 function ParticipantIdentifier() {
 
@@ -34,7 +34,7 @@ function ParticipantIdentifier() {
         dispatch(storeImageTime(imgTime));
         dispatch(storeExpName(expName));
         
-        // POST user
+        // POST experiment participation
         const requestOptions = {
             mode: 'cors',
             method: 'POST',
@@ -57,9 +57,22 @@ function ParticipantIdentifier() {
             })
             .then(data =>  {
                 dispatch(storeParticipationId(data));
-                // TODO: store experiment questions
-                dispatch(storeParticipationId(data));
-                navigate("/" + data + "/exercise")
+
+                const requestOptions = {
+                    mode: 'cors',
+                    method: 'GET',
+                    headers: { 'Content-Type': 'application/json', 'X-API-KEY': process.env.REACT_APP_API_KEY_VALUE }
+                };
+        
+                // load exercise data from the API the first time
+                fetch(process.env.REACT_APP_API_BASE_URL + '/experiment-participations/' + data, requestOptions)
+                .then(data => {
+                    dispatch(storeExperimentQuestions(data));
+                    navigate("/" + data + "/exercise")
+                })
+                .catch(function(err) {
+                    navigate("/error");
+                });
             })
             .catch(function(err) {
                 navigate("/error");

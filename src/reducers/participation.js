@@ -16,12 +16,12 @@ const participationReducer = (state = initialState, action) => {
                 ...state,
                 externalUserId: action.data.externalUserId
             };;
-        case "STORE_EXPERIMENTID":
+        case "STORE_EXPERIMENTQUESTIONS":
             return {
                 ...state,
-                experimentId: action.data.experimentId
+                experimentId: action.data.experimentQuestions
             };;
-        case "RELEASE_USER_INFO":
+        case "RELEASE_PARTICIPATION_INFO":
             return initialState;
         default:
             return state;
