@@ -15,7 +15,7 @@ function Exercise() {
     const { participationId } = useParams();
     const [exercise, setExercise] = useState({});
     const [count, setCount] = useState(1);
-    const globalState = useSelector(state => state.participationState);
+    const participationState = useSelector(state => state.participationState);
     const imageState = useSelector(state => state.imageState);
 
     // lade die nächste "Aufgabe" über das API
@@ -27,7 +27,7 @@ function Exercise() {
             method: 'GET',
             headers: { 'Content-Type': 'application/json', 'X-API-KEY': process.env.REACT_APP_API_KEY_VALUE }
         };
-
+        
         // load exercise data from the API the first time
         fetch(process.env.REACT_APP_API_BASE_URL + '/experiment-participations/' + participationId + '/exercises/next', requestOptions)
         .then(response => {
@@ -45,7 +45,7 @@ function Exercise() {
         .catch(function(err) {
             navigate("/error");
         });
-    }, [participationId, globalState.participationId, navigate, dispatch]);
+    }, [participationId, participationState.participationId, navigate, dispatch]);
 
     const handleSubmit = (answer, timeToClick, timeToSubmit) => {
         if(answer) {
@@ -56,7 +56,7 @@ function Exercise() {
                 headers: { 'Content-Type': 'application/json', 'X-API-KEY': process.env.REACT_APP_API_KEY_VALUE },
                 body: JSON.stringify({
                     answer: answer,
-                    experimentId: globalState.participationId,
+                    experimentId: participationState.participationId,
                     time: new Date().toISOString(),
                     timeToClick: timeToClick,
                     timeToSubmit: timeToSubmit,
@@ -125,7 +125,7 @@ function Exercise() {
                         <div className="Answer-Part">
                             <h2>{exercise.question}</h2>
                             <br />
-                            <AnswerForm onSubmit={handleSubmit} />
+                            <AnswerForm questions={participationState.experimentQuestions} onSubmit={handleSubmit} />
                         </div>
                     </Col>
                 </Row>

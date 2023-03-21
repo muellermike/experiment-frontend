@@ -15,6 +15,8 @@ function AnswerForm(props) {
         { value: "right", name: "There are more dots on the right side.", payout: "(payout 5 Cents)" }
     ];
     
+    console.log(props.questions);
+
     const handleSubmit = (event) => {
         event.preventDefault();
         props.onSubmit(answer, (clickTime - startTime), (new Date() - startTime));
@@ -26,6 +28,7 @@ function AnswerForm(props) {
     // show form to input audio file
     return (
         <div>
+            {props.questions[0].groupName}
             <Form className="vertical-center">
                 <Form.Group className="mb-3" controlId="formBasicAudio">
                     <Form.Label>Please answer the question by <b>clicking on one of the buttons</b> below.</Form.Label><br />

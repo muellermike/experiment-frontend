@@ -1,7 +1,6 @@
 import React from "react";
 import "./ExercisePresentation.css";
 import { Card } from "react-bootstrap";
-import emptyEx from "../../assets/images/empty_ex.PNG"
 
 class ExercisePresentation extends React.Component {
     constructor(props){
@@ -76,7 +75,7 @@ class ExercisePresentation extends React.Component {
                         </Card.Text>
                     </Card.Body>
                     <div>
-                        {this.state.timeIsUp ? <div><Card.Img className="Image-Dots" variant="bottom" src={emptyEx} /></div> : 
+                        {
                             <div><Card.Img className="Image-Dots" variant="bottom" src={this.props.image} /></div>
                         }
                     </div>

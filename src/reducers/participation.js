@@ -19,7 +19,8 @@ const participationReducer = (state = initialState, action) => {
         case "STORE_EXPERIMENTQUESTIONS":
             return {
                 ...state,
-                experimentId: action.data.experimentQuestions
+                experimentQuestions: JSON.parse(action.data.experimentQuestions),
+                bareExperimentQuestions: action.data.experimentQuestions
             };;
         case "RELEASE_PARTICIPATION_INFO":
             return initialState;

@@ -16,6 +16,7 @@ function ParticipantIdentifier() {
     let navigate = useNavigate();
     const dispatch = useDispatch();
     let query = useQuery();
+    let participationId = 0;
 
     useEffect(() => {
         if (query.get("id_user")) {
@@ -57,6 +58,7 @@ function ParticipantIdentifier() {
             })
             .then(data =>  {
                 dispatch(storeParticipationId(data));
+                participationId = data;
 
                 const requestOptions = {
                     mode: 'cors',
@@ -64,11 +66,14 @@ function ParticipantIdentifier() {
                     headers: { 'Content-Type': 'application/json', 'X-API-KEY': process.env.REACT_APP_API_KEY_VALUE }
                 };
         
-                // load exercise data from the API the first time
+                // load experiment questions from the API
                 fetch(process.env.REACT_APP_API_BASE_URL + '/experiment-participations/' + data, requestOptions)
+                .then(response => {
+                    return response.json();
+                })
                 .then(data => {
-                    dispatch(storeExperimentQuestions(data));
-                    navigate("/" + data + "/exercise")
+                    dispatch(storeExperimentQuestions(data[0].Questions));
+                    navigate("/" + participationId + "/exercise")
                 })
                 .catch(function(err) {
                     navigate("/error");
