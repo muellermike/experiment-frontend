@@ -26,7 +26,7 @@ function AnswerForm(props) {
         <div>
             <Form className="vertical-center">
                 {props.questions.map((qg, ind) => (
-                    <QuestionGroup id={`group-${ind}`} key={`group-${ind}`} group={qg}></QuestionGroup>
+                    <QuestionGroup id={`group-${ind}`} key={`group-${ind}`} groupKey={`group-${ind}`} group={qg}></QuestionGroup>
                 ))}
                 <Button variant="primary" disabled={!isAnswered} type="submit" onClick={handleSubmit}>
                     Next

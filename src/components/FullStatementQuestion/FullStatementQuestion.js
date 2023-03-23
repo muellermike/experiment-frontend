@@ -19,49 +19,49 @@ function FullStatementQuestion(props) {
                 label={`1 ${props.question.answerType.min}`}
                 name={props.question.internalName}
                 type="radio"
-                id={`inline-radio-1`}
+                id={`inline-radio-1-${props.questionKey}`}
             />
             <Form.Check
                 inline
                 label="2"
                 name={props.question.internalName}
                 type="radio"
-                id={`inline-radio-2`}
+                id={`inline-radio-2-${props.questionKey}`}
             />
             <Form.Check
                 inline
                 label="3"
                 name={props.question.internalName}
                 type="radio"
-                id={`inline-radio-3`}
+                id={`inline-radio-3-${props.questionKey}`}
+            />
+            <Form.Check
+                inline
+                label="4"
+                name={props.question.internalName}
+                type="radio"
+                id={`inline-radio-4-${props.questionKey}`}
             />
             <Form.Check
                 inline
                 label="5"
                 name={props.question.internalName}
                 type="radio"
-                id={`inline-radio-5`}
-            />
-            <Form.Check
-                inline
-                label="5"
-                name={props.question.internalName}
-                type="radio"
-                id={`inline-radio-5`}
+                id={`inline-radio-5-${props.questionKey}`}
             />
             <Form.Check
                 inline
                 label="6"
                 name={props.question.internalName}
                 type="radio"
-                id={`inline-radio-6`}
+                id={`inline-radio-6-${props.questionKey}`}
             />
             <Form.Check
                 inline
                 label={`7 ${props.question.answerType.max}`}
                 name={props.question.internalName}
                 type="radio"
-                id={`inline-radio-7`}
+                id={`inline-radio-7-${props.questionKey}`}
             />
         </div>
     )

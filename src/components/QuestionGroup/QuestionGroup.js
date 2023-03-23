@@ -1,5 +1,6 @@
 import { Form } from "react-bootstrap";
 import FullStatementQuestion from "../FullStatementQuestion/FullStatementQuestion";
+import TableGroupQuestions from "../TableQuestion/TableGroupQuestions";
 
 function QuestionGroup(props) {
 
@@ -14,10 +15,13 @@ function QuestionGroup(props) {
                 {props.group.questionType === "fullIndividualStatement" ? 
                 <div>
                     {props.group.questions.map((q, idx) => (
-                    <FullStatementQuestion id={`questions-${idx}`} key={`questions-${idx}`} question={q}></FullStatementQuestion>
+                    <FullStatementQuestion id={`questions-${idx}`} key={`questions-${idx}`} questionKey={`${props.groupKey}-questions-${idx}`} question={q}></FullStatementQuestion>
                 ))}
                 </div> :
-                props.group.questionType === "table" ? <div>Table</div> :
+                props.group.questionType === "table" ? 
+                <div>
+                    <TableGroupQuestions groupKey={`${props.groupKey}`} questions={props.group.questions} answerType={props.group.answerType}></TableGroupQuestions>
+                </div> :
                 <div>unknown</div>}
             </Form.Group>
         </div>
