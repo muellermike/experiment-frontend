@@ -8,61 +8,46 @@ function FullStatementQuestion(props) {
     const [clickTime, setClickTime] = useState(null);
     const [startTime, setStartTime] = useState(new Date());
 
-    console.log("FullStatementQuestions");
-    console.log(props.question);
+    const handleClick = (value) => {
+        props.answerReceiver({
+            questionName: props.question.internalName,
+            answerValue: value,
+            answerType: props.question.answerType.answerDataType
+        });
+    }
+
     // show form to input a full statement answer
     return (
         <div>
             <br />{props.question.questionText}<br />
-            <Form.Check
-                inline
-                label={`1 ${props.question.answerType.min}`}
-                name={props.question.internalName}
-                type="radio"
-                id={`inline-radio-1-${props.questionKey}`}
-            />
-            <Form.Check
-                inline
-                label="2"
-                name={props.question.internalName}
-                type="radio"
-                id={`inline-radio-2-${props.questionKey}`}
-            />
-            <Form.Check
-                inline
-                label="3"
-                name={props.question.internalName}
-                type="radio"
-                id={`inline-radio-3-${props.questionKey}`}
-            />
-            <Form.Check
-                inline
-                label="4"
-                name={props.question.internalName}
-                type="radio"
-                id={`inline-radio-4-${props.questionKey}`}
-            />
-            <Form.Check
-                inline
-                label="5"
-                name={props.question.internalName}
-                type="radio"
-                id={`inline-radio-5-${props.questionKey}`}
-            />
-            <Form.Check
-                inline
-                label="6"
-                name={props.question.internalName}
-                type="radio"
-                id={`inline-radio-6-${props.questionKey}`}
-            />
-            <Form.Check
-                inline
-                label={`7 ${props.question.answerType.max}`}
-                name={props.question.internalName}
-                type="radio"
-                id={`inline-radio-7-${props.questionKey}`}
-            />
+            {['1','2','3','4','5','6','7'].map((id) => (
+                id === '1' ? 
+                <Form.Check
+                    inline
+                    label={`${id} ${props.question.answerType.min}`}
+                    name={props.question.internalName}
+                    type="radio"
+                    id={`inline-radio-${id}-${props.questionKey}`}
+                    onClick={() => {handleClick(id)}}
+                /> :
+                id === '7' ?
+                <Form.Check
+                    inline
+                    label={`${id} ${props.question.answerType.max}`}
+                    name={props.question.internalName}
+                    type="radio"
+                    id={`inline-radio-${id}-${props.questionKey}`}
+                    onClick={() => {handleClick(id)}}
+                /> : 
+                <Form.Check
+                    inline
+                    label={`${id}`}
+                    name={props.question.internalName}
+                    type="radio"
+                    id={`inline-radio-${id}-${props.questionKey}`}
+                    onClick={() => {handleClick(id)}}
+                />
+            ))}
         </div>
     )
 }

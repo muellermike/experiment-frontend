@@ -9,9 +9,14 @@ function TableGroupQuestions(props) {
     const [clickTime, setClickTime] = useState(null);
     const [startTime, setStartTime] = useState(new Date());
 
-    console.log("TableGroupQuestions");
-    console.log(props.questions);
-    console.log(props.answerType);
+    const handleClick = (value, name) => {
+        props.answerReceiver({
+            questionName: name,
+            answerValue: value,
+            answerType: props.answerType.answerDataType
+        });
+    }
+
     // show form to input a likert table <br />{props.question.questionText}<br />
     return (
         <div>
@@ -33,69 +38,18 @@ function TableGroupQuestions(props) {
                     {props.questions.map((q, questionKey) => (
                         <tr>
                             <td>{q.questionText}</td>
-                            <td>
-                                <Form.Check
-                                    inline
-                                    name={q.internalName}
-                                    type="radio"
-                                    id={`inline-radio-1-${props.groupKey}-${questionKey}`}
-                                    className="table-likert-form-input"
-                                />
-                            </td>
-                            <td>
-                                <Form.Check
-                                    inline
-                                    name={q.internalName}
-                                    type="radio"
-                                    id={`inline-radio-2-${props.groupKey}-${questionKey}`}
-                                    className="table-likert-form-input"
-                                />
-                            </td>
-                            <td>
-                                <Form.Check
-                                    inline
-                                    name={q.internalName}
-                                    type="radio"
-                                    id={`inline-radio-3-${props.groupKey}-${questionKey}`}
-                                    className="table-likert-form-input"
-                                />
-                            </td>
-                            <td>
-                                <Form.Check
-                                    inline
-                                    name={q.internalName}
-                                    type="radio"
-                                    id={`inline-radio-4-${props.groupKey}-${questionKey}`}
-                                    className="table-likert-form-input"
-                                />
-                            </td>
-                            <td>
-                                <Form.Check
-                                    inline
-                                    name={q.internalName}
-                                    type="radio"
-                                    id={`inline-radio-5-${props.groupKey}-${questionKey}`}
-                                    className="table-likert-form-input"
-                                />
-                            </td>
-                            <td>
-                                <Form.Check
-                                    inline
-                                    name={q.internalName}
-                                    type="radio"
-                                    id={`inline-radio-6-${props.groupKey}-${questionKey}`}
-                                    className="table-likert-form-input"
-                                />
-                            </td>
-                            <td>
-                                <Form.Check
-                                    inline
-                                    name={q.internalName}
-                                    type="radio"
-                                    id={`inline-radio-7-${props.groupKey}-${questionKey}`}
-                                    className="table-likert-form-input"
-                                />
-                            </td>
+                            {['1','2','3','4','5','6','7'].map((id) => (
+                                <td>
+                                    <Form.Check
+                                        inline
+                                        name={q.internalName}
+                                        type="radio"
+                                        id={`inline-radio-${id}-${props.groupKey}-${questionKey}`}
+                                        className="table-likert-form-input"
+                                        onClick={() => {handleClick(id, q.internalName)}}
+                                    />
+                                </td>    
+                            ))}
                         </tr>
                     ))}
                 </tbody>

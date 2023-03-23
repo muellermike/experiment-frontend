@@ -4,20 +4,40 @@ import { useState } from "react";
 import QuestionGroup from "../QuestionGroup/QuestionGroup";
 
 function AnswerForm(props) {
-    const initialAnswer = "";
+    const initialAnswer = [];
     const [isAnswered, setAnswered] = useState(false);
-    const [answer, setAnswer] = useState(initialAnswer);
+    const [answers, setAnswers] = useState(initialAnswer);
     const [clickTime, setClickTime] = useState(null);
     const [startTime, setStartTime] = useState(new Date());
-    
-    console.log("AnswerForm")
-    console.log(props.questions);
+
+    const questionsLength = () => {
+        let count = 0;
+        for(let i=0; i < props.questions.length; i ++) {
+            count += props.questions[i].questions.length;
+        }
+        return count;
+    };
+
+    if(answers.length === questionsLength() && !isAnswered) {
+        setAnswered(true);
+    }
+
+    const receiveAnswer = (value) => {
+        if(answers.findIndex(item => item.answer.questionName === value.answer.questionName) !== -1) {
+            setAnswers(prevArray => 
+                prevArray.map(item => (item.answer.questionName === value.answer.questionName ? { ...item, answer: value.answer } : item))
+            );
+        } else {
+            console.log("preArray length " + answers.length);
+            setAnswers(prevArray => [...prevArray, value]);
+        }
+    };
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        props.onSubmit(answer, (clickTime - startTime), (new Date() - startTime));
+        props.onSubmit(answers, (clickTime - startTime), (new Date() - startTime));
         setAnswered(false);
-        setAnswer(initialAnswer);
+        setAnswers(initialAnswer);
         setStartTime(new Date());
     }
 
@@ -26,7 +46,7 @@ function AnswerForm(props) {
         <div>
             <Form className="vertical-center">
                 {props.questions.map((qg, ind) => (
-                    <QuestionGroup id={`group-${ind}`} key={`group-${ind}`} groupKey={`group-${ind}`} group={qg}></QuestionGroup>
+                    <QuestionGroup id={`group-${ind}`} key={`group-${ind}`} groupKey={`group-${ind}`} group={qg} groupAnswerReceiver={receiveAnswer}></QuestionGroup>
                 ))}
                 <Button variant="primary" disabled={!isAnswered} type="submit" onClick={handleSubmit}>
                     Next
