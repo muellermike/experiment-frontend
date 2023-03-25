@@ -1,6 +1,7 @@
 import React from "react";
 import "./ExercisePresentation.css";
 import { Card } from "react-bootstrap";
+import DOMPurify from "dompurify";
 
 class ExercisePresentation extends React.Component {
     constructor(props){
@@ -69,16 +70,12 @@ class ExercisePresentation extends React.Component {
         return (
             <div>
                 <Card>
+                    <Card.Img variant="top" className="Image-Dots" style={{ alignSelf: "center" }} src={this.props.image} /><br />
                     <Card.Body className="card-body-image">
                         <Card.Text>
-                            {this.props.text}
+                            <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(this.props.text)}}></p>
                         </Card.Text>
                     </Card.Body>
-                    <div>
-                        {
-                            <div><Card.Img className="Image-Dots" variant="bottom" src={this.props.image} /></div>
-                        }
-                    </div>
                 </Card>
             </div>
         );

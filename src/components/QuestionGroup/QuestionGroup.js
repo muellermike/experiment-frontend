@@ -17,16 +17,16 @@ function QuestionGroup(props) {
     return (
         <div>
             <Form.Group className="mb-3" controlId="formBasicAudio">
-                <Form.Label><b>{props.group.groupTitle}</b><br />{props.group.groupSubtitle}</Form.Label><br />
+                <Form.Label><p><b>{props.group.groupTitle}</b></p><p>{props.group.groupSubtitle}</p></Form.Label>
                 {props.group.questionType === "fullIndividualStatement" ? 
                 <div>
                     {props.group.questions.map((q, idx) => (
-                    <FullStatementQuestion id={`questions-${idx}`} key={`questions-${idx}`} questionKey={`${props.groupKey}-questions-${idx}`} question={q} answerReceiver={receiveAnswer}></FullStatementQuestion>
+                    <FullStatementQuestion id={`questions-${idx}`} key={`questions-${idx}`} questionKey={`${props.groupKey}-questions-${idx}`} question={q} answerReceiver={receiveAnswer} image={props.image} text={props.text}></FullStatementQuestion>
                 ))}
                 </div> :
                 props.group.questionType === "table" ? 
                 <div>
-                    <TableGroupQuestions groupKey={`${props.groupKey}`} questions={props.group.questions} answerType={props.group.answerType} answerReceiver={receiveAnswer}></TableGroupQuestions>
+                    <TableGroupQuestions groupKey={`${props.groupKey}`} questions={props.group.questions} answerType={props.group.answerType} answerReceiver={receiveAnswer} image={props.image} text={props.text}></TableGroupQuestions>
                 </div> :
                 <div>unknown</div>}
             </Form.Group>

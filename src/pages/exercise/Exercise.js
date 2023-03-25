@@ -49,6 +49,7 @@ function Exercise() {
 
     const handleSubmit = (answer, timeToClick, timeToSubmit) => {
         if(answer) {
+            console.log(answer);
             // POST answer
             const requestOptions = {
                 mode: 'cors',
@@ -60,8 +61,8 @@ function Exercise() {
                     time: new Date().toISOString(),
                     timeToClick: timeToClick,
                     timeToSubmit: timeToSubmit,
-                    imageId: parseInt(exercise.image.id),
-                    textId: parseInt(exercise.text.id)
+                    imageId: parseInt(exercise.image.imageId),
+                    textId: parseInt(exercise.text.textId)
                 })
             };
             fetch(process.env.REACT_APP_API_BASE_URL + '/exercises', requestOptions)
@@ -91,6 +92,7 @@ function Exercise() {
                     return response.json();
                 })
                 .then(data => {
+                    console.log(data);
                     setExercise(data);
                     setCount(count + 1);
                 });
@@ -114,7 +116,7 @@ function Exercise() {
                 </Row>
                 <Row className="Container-Row">
                     <Col>
-                        <ProgressBar now={(count / process.env.REACT_APP_NUM_EX) * 100} label={(count / process.env.REACT_APP_NUM_EX) * 100 + " %"}></ProgressBar>
+                        <ProgressBar now={((count / process.env.REACT_APP_NUM_EX) * 100).toFixed(2)} label={((count / process.env.REACT_APP_NUM_EX) * 100).toFixed(2) + " %"}></ProgressBar>
                     </Col>
                 </Row>
                 <Row className="Container-Row">
@@ -125,7 +127,7 @@ function Exercise() {
                         <div className="Answer-Part">
                             <h2>{exercise.question}</h2>
                             <br />
-                            <AnswerForm questions={participationState.experimentQuestions} onSubmit={handleSubmit} />
+                            <AnswerForm questions={participationState.experimentQuestions} text={exercise.text?.textId} image={exercise.image?.imageId} onSubmit={handleSubmit} />
                         </div>
                     </Col>
                 </Row>

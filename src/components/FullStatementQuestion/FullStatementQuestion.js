@@ -1,12 +1,16 @@
 import { Form } from "react-bootstrap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function FullStatementQuestion(props) {
-    const initialAnswer = "";
-    const [isAnswered, setAnswered] = useState(false);
-    const [answer, setAnswer] = useState(initialAnswer);
+    const initialSelection = '';
+    const [selectedValue, setSelectedValue] = useState(initialSelection);
+    const [answer, setAnswer] = useState("");
     const [clickTime, setClickTime] = useState(null);
     const [startTime, setStartTime] = useState(new Date());
+
+    useEffect(() => {
+        setSelectedValue(initialSelection);
+    }, [props.text, props.image])
 
     const handleClick = (value) => {
         props.answerReceiver({
@@ -14,12 +18,21 @@ function FullStatementQuestion(props) {
             answerValue: value,
             answerType: props.question.answerType.answerDataType
         });
+        setSelectedValue(value);
     }
+
+    const isChecked = (checkboxId) => {
+        return checkboxId === selectedValue;
+    };
+
+    console.log("FullStatementQuesiton Text und Image");
+    console.log(props.text);
+    console.log(props.image);
 
     // show form to input a full statement answer
     return (
         <div>
-            <br />{props.question.questionText}<br />
+            <br /><p>{props.question.questionText}</p>
             {['1','2','3','4','5','6','7'].map((id) => (
                 id === '1' ? 
                 <Form.Check
@@ -28,7 +41,8 @@ function FullStatementQuestion(props) {
                     name={props.question.internalName}
                     type="radio"
                     id={`inline-radio-${id}-${props.questionKey}`}
-                    onClick={() => {handleClick(id)}}
+                    onChange={() => {handleClick(id)}}
+                    checked={isChecked(id)}
                 /> :
                 id === '7' ?
                 <Form.Check
@@ -37,7 +51,8 @@ function FullStatementQuestion(props) {
                     name={props.question.internalName}
                     type="radio"
                     id={`inline-radio-${id}-${props.questionKey}`}
-                    onClick={() => {handleClick(id)}}
+                    onChange={() => {handleClick(id)}}
+                    checked={isChecked(id)}
                 /> : 
                 <Form.Check
                     inline
@@ -45,7 +60,8 @@ function FullStatementQuestion(props) {
                     name={props.question.internalName}
                     type="radio"
                     id={`inline-radio-${id}-${props.questionKey}`}
-                    onClick={() => {handleClick(id)}}
+                    onChange={() => {handleClick(id)}}
+                    checked={isChecked(id)}
                 />
             ))}
         </div>

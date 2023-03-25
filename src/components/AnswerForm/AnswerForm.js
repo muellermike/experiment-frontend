@@ -10,6 +10,12 @@ function AnswerForm(props) {
     const [clickTime, setClickTime] = useState(null);
     const [startTime, setStartTime] = useState(new Date());
 
+    console.log("check whether answers is new");
+    console.log(answers);
+    console.log("Text and Image");
+    console.log(props.text);
+    console.log(props.image);
+
     const questionsLength = () => {
         let count = 0;
         for(let i=0; i < props.questions.length; i ++) {
@@ -46,7 +52,7 @@ function AnswerForm(props) {
         <div>
             <Form className="vertical-center">
                 {props.questions.map((qg, ind) => (
-                    <QuestionGroup id={`group-${ind}`} key={`group-${ind}`} groupKey={`group-${ind}`} group={qg} groupAnswerReceiver={receiveAnswer}></QuestionGroup>
+                    <QuestionGroup id={`group-${ind}`} key={`group-${ind}`} groupKey={`group-${ind}`} group={qg} groupAnswerReceiver={receiveAnswer} image={props.image} text={props.text}></QuestionGroup>
                 ))}
                 <Button variant="primary" disabled={!isAnswered} type="submit" onClick={handleSubmit}>
                     Next
