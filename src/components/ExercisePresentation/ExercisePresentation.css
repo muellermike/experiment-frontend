@@ -1,6 +1,6 @@
 .Image-Dots {
-    max-height: 250px;
-    max-width: 250px;
+    max-height: 175px;
+    max-width: 175px;
     height: auto;
 }
 
@@ -14,6 +14,6 @@
 
 @media (min-width: 767px) {
     .Image-Dots {
-        min-height: 250px;
+        min-height: 175px;
     }
 }

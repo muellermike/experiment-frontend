@@ -17,7 +17,7 @@ function QuestionGroup(props) {
     return (
         <div>
             <Form.Group className="mb-3" controlId="formBasicAudio">
-                <Form.Label><p><b>{props.group.groupTitle}</b></p><p>{props.group.groupSubtitle}</p></Form.Label>
+                <Form.Label><p><b>{props.group.groupTitle}</b></p><p style={{marginBottom: 0}}>{props.group.groupSubtitle}</p></Form.Label>
                 {props.group.questionType === "fullIndividualStatement" ? 
                 <div>
                     {props.group.questions.map((q, idx) => (

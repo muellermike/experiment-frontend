@@ -1,5 +1,6 @@
 import { Form } from "react-bootstrap";
 import { useEffect, useState } from "react";
+import RangeQuestion from "../RangeQuestion/RangeQuestion";
 
 function FullStatementQuestion(props) {
     const initialSelection = '';
@@ -25,45 +26,46 @@ function FullStatementQuestion(props) {
         return checkboxId === selectedValue;
     };
 
-    console.log("FullStatementQuesiton Text und Image");
-    console.log(props.text);
-    console.log(props.image);
-
     // show form to input a full statement answer
     return (
         <div>
             <br /><p>{props.question.questionText}</p>
-            {['1','2','3','4','5','6','7'].map((id) => (
-                id === '1' ? 
-                <Form.Check
-                    inline
-                    label={`${id} ${props.question.answerType.min}`}
-                    name={props.question.internalName}
-                    type="radio"
-                    id={`inline-radio-${id}-${props.questionKey}`}
-                    onChange={() => {handleClick(id)}}
-                    checked={isChecked(id)}
-                /> :
-                id === '7' ?
-                <Form.Check
-                    inline
-                    label={`${id} ${props.question.answerType.max}`}
-                    name={props.question.internalName}
-                    type="radio"
-                    id={`inline-radio-${id}-${props.questionKey}`}
-                    onChange={() => {handleClick(id)}}
-                    checked={isChecked(id)}
-                /> : 
-                <Form.Check
-                    inline
-                    label={`${id}`}
-                    name={props.question.internalName}
-                    type="radio"
-                    id={`inline-radio-${id}-${props.questionKey}`}
-                    onChange={() => {handleClick(id)}}
-                    checked={isChecked(id)}
-                />
-            ))}
+                {
+                    props.question.answerType.type === "likert" ?
+                    ['1','2','3','4','5','6','7'].map((id) => (
+                    id === '1' ? 
+                    <Form.Check
+                        inline
+                        label={`${id} ${props.question.answerType.min}`}
+                        name={props.question.internalName}
+                        type="radio"
+                        id={`inline-radio-${id}-${props.questionKey}`}
+                        onChange={() => {handleClick(id)}}
+                        checked={isChecked(id)}
+                    /> :
+                    id === '7' ?
+                    <Form.Check
+                        inline
+                        label={`${id} ${props.question.answerType.max}`}
+                        name={props.question.internalName}
+                        type="radio"
+                        id={`inline-radio-${id}-${props.questionKey}`}
+                        onChange={() => {handleClick(id)}}
+                        checked={isChecked(id)}
+                    /> : 
+                    <Form.Check
+                        inline
+                        label={`${id}`}
+                        name={props.question.internalName}
+                        type="radio"
+                        id={`inline-radio-${id}-${props.questionKey}`}
+                        onChange={() => {handleClick(id)}}
+                        checked={isChecked(id)}
+                    />
+                )) : props.question.answerType.type === "percentage" ?
+                        <RangeQuestion max={props.question.answerType.max} min={props.question.answerType.min} handleSlide={handleClick} valueToShow={selectedValue}></RangeQuestion> :
+                <div>different</div>
+            }
         </div>
     )
 }
