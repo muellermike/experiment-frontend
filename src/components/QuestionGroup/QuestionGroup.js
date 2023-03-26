@@ -16,7 +16,7 @@ function QuestionGroup(props) {
     // show form to input audio file
     return (
         <div>
-            <Form.Group className="mb-3" controlId="formBasicAudio">
+            <Form.Group className="mb-3 question-group" controlId="formBasicAudio">
                 <Form.Label><p><b>{props.group.groupTitle}</b></p><p style={{marginBottom: 0}}>{props.group.groupSubtitle}</p></Form.Label>
                 {props.group.questionType === "fullIndividualStatement" ? 
                 <div>

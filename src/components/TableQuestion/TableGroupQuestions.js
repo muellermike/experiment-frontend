@@ -1,4 +1,3 @@
-import "./TableGroupQuestions.css";
 import { useState } from "react";
 import { Form, Table } from "react-bootstrap";
 import TableQuestion from "./TableQuestion";

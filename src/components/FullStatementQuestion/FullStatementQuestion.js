@@ -28,8 +28,8 @@ function FullStatementQuestion(props) {
 
     // show form to input a full statement answer
     return (
-        <div>
-            <br /><p>{props.question.questionText}</p>
+        <div style={{marginTop: 15}}>
+            <p>{props.question.questionText}</p>
                 {
                     props.question.answerType.type === "likert" ?
                     ['1','2','3','4','5','6','7'].map((id) => (
