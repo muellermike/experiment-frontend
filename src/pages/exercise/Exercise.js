@@ -92,7 +92,6 @@ function Exercise() {
                     return response.json();
                 })
                 .then(data => {
-                    console.log(data);
                     setExercise(data);
                     setCount(count + 1);
                 });

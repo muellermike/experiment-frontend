@@ -10,12 +10,6 @@ function AnswerForm(props) {
     const [clickTime, setClickTime] = useState(null);
     const [startTime, setStartTime] = useState(new Date());
 
-    console.log("check whether answers is new");
-    console.log(answers);
-    console.log("Text and Image");
-    console.log(props.text);
-    console.log(props.image);
-
     const questionsLength = () => {
         let count = 0;
         for(let i=0; i < props.questions.length; i ++) {
@@ -34,7 +28,6 @@ function AnswerForm(props) {
                 prevArray.map(item => (item.answer.questionName === value.answer.questionName ? { ...item, answer: value.answer } : item))
             );
         } else {
-            console.log("preArray length " + answers.length);
             setAnswers(prevArray => [...prevArray, value]);
         }
     };

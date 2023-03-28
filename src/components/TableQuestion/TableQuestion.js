@@ -5,14 +5,6 @@ function TableQuestion(props) {
     const initialSelection = '';
     const [selectedValue, setSelectedValue] = useState(initialSelection);
 
-    console.log("TableQuestion");
-    console.log(props.question.internalName);
-    console.log(props.question.questionText);
-    console.log(props.groupKey);
-    console.log(props.questionKey);
-    console.log(props.text);
-    console.log(props.image);
-
     useEffect(() => {
         setSelectedValue(initialSelection);
     }, [props.text, props.image])
