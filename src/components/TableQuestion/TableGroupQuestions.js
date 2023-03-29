@@ -1,14 +1,7 @@
-import { useState } from "react";
-import { Form, Table } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 import TableQuestion from "./TableQuestion";
 
 function TableGroupQuestions(props) {
-    const initialSelection = '';
-    const [selectedValue, setSelectedValue] = useState(initialSelection);
-    const [isAnswered, setAnswered] = useState(false);
-    const [answer, setAnswer] = useState("");
-    const [clickTime, setClickTime] = useState(null);
-    const [startTime, setStartTime] = useState(new Date());
 
     const receiver = (value) => {
         value.answerType = props.answerType.answerDataType;
@@ -34,7 +27,7 @@ function TableGroupQuestions(props) {
                 </thead>
                 <tbody>
                     {props.questions.map((q, questionKey) => (
-                        <TableQuestion question={q} questionKey={questionKey} groupKey={props.groupKey} answerReceiver={receiver} image={props.image} text={props.text}></TableQuestion>
+                        <TableQuestion key={`table-question-${questionKey}`} question={q} questionKey={`table-question-${questionKey}`} groupKey={props.groupKey} answerReceiver={receiver} image={props.image} text={props.text}></TableQuestion>
                     ))}
                 </tbody>
             </Table>

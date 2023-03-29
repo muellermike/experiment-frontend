@@ -5,19 +5,23 @@ import RangeQuestion from "../RangeQuestion/RangeQuestion";
 function FullStatementQuestion(props) {
     const initialSelection = '';
     const [selectedValue, setSelectedValue] = useState(initialSelection);
-    const [answer, setAnswer] = useState("");
-    const [clickTime, setClickTime] = useState(null);
     const [startTime, setStartTime] = useState(new Date());
 
     useEffect(() => {
         setSelectedValue(initialSelection);
+        setStartTime(new Date());
     }, [props.text, props.image])
 
     const handleClick = (value) => {
+        let currentTime = new Date();
+
         props.answerReceiver({
             questionName: props.question.internalName,
             answerValue: value,
-            answerType: props.question.answerType.answerDataType
+            answerType: props.question.answerType.answerDataType,
+            answerStart: startTime,
+            answerEnd: currentTime,
+            answerTime: currentTime - startTime
         });
         setSelectedValue(value);
     }
@@ -36,6 +40,7 @@ function FullStatementQuestion(props) {
                     id === '1' ? 
                     <Form.Check
                         inline
+                        key={`likert-ansver-vlaue-${id}`}
                         label={`${id} ${props.question.answerType.min}`}
                         name={props.question.internalName}
                         type="radio"
@@ -46,6 +51,7 @@ function FullStatementQuestion(props) {
                     id === '7' ?
                     <Form.Check
                         inline
+                        key={`likert-ansver-vlaue-${id}`}
                         label={`${id} ${props.question.answerType.max}`}
                         name={props.question.internalName}
                         type="radio"
@@ -55,6 +61,7 @@ function FullStatementQuestion(props) {
                     /> : 
                     <Form.Check
                         inline
+                        key={`likert-ansver-vlaue-${id}`}
                         label={`${id}`}
                         name={props.question.internalName}
                         type="radio"

@@ -1,9 +1,6 @@
 import { Col, Form, Row } from "react-bootstrap";
-import { useEffect, useState } from "react";
 
 function RangeQuestion(props) {
-    const initialSelection = props.min;
-    const [selectedValue, setSelectedValue] = useState(initialSelection);
 
     // show form to input a full statement answer
     return (

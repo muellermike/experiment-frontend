@@ -4,15 +4,21 @@ import { Form } from "react-bootstrap";
 function TableQuestion(props) {
     const initialSelection = '';
     const [selectedValue, setSelectedValue] = useState(initialSelection);
+    const [startTime, setStartTime] = useState(new Date());
 
     useEffect(() => {
         setSelectedValue(initialSelection);
+        setStartTime(new Date());
     }, [props.text, props.image])
 
     const handleChange = (value) => {
+        let currentTime = new Date();
         props.answerReceiver({
             questionName: props.question.internalName,
-            answerValue: value
+            answerValue: value,
+            answerStart: startTime,
+            answerEnd: currentTime,
+            answerTime: currentTime - startTime
         });
         setSelectedValue(value);
     };
@@ -26,7 +32,7 @@ function TableQuestion(props) {
         <tr>
             <td>{props.question.questionText}</td>
             {['1','2','3','4','5','6','7'].map((id) => (
-                <td>
+                <td key={`likert-table-question${id}`}>
                     <Form.Check
                         inline
                         name={props.question.internalName}
