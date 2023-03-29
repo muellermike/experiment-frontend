@@ -1,10 +1,8 @@
 import { Form } from "react-bootstrap";
-import { useState } from "react";
 import FullStatementQuestion from "../FullStatementQuestion/FullStatementQuestion";
 import TableGroupQuestions from "../TableQuestion/TableGroupQuestions";
 
 function QuestionGroup(props) {
-    const [groupAnswers, setGroupAnswers] = useState([]);
 
     const receiveAnswer = (value) => {
         props.groupAnswerReceiver({

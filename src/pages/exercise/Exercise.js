@@ -47,7 +47,7 @@ function Exercise() {
         });
     }, [participationId, participationState.participationId, navigate, dispatch]);
 
-    const handleSubmit = (answer, timeToClick, timeToSubmit) => {
+    const handleSubmit = (answer) => {
         if(answer) {
             console.log(answer);
             // POST answer
@@ -59,8 +59,6 @@ function Exercise() {
                     answer: JSON.stringify(answer),
                     experimentId: participationState.participationId,
                     time: new Date().toISOString(),
-                    timeToClick: timeToClick,
-                    timeToSubmit: timeToSubmit,
                     imageId: parseInt(exercise.image.imageId),
                     textId: parseInt(exercise.text.textId)
                 })

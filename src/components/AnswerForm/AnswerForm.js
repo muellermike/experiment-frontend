@@ -7,8 +7,6 @@ function AnswerForm(props) {
     const initialAnswer = [];
     const [isAnswered, setAnswered] = useState(false);
     const [answers, setAnswers] = useState(initialAnswer);
-    const [clickTime, setClickTime] = useState(null);
-    const [startTime, setStartTime] = useState(new Date());
 
     const questionsLength = () => {
         let count = 0;
@@ -34,10 +32,9 @@ function AnswerForm(props) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        props.onSubmit(answers, (clickTime - startTime), (new Date() - startTime));
+        props.onSubmit(answers);
         setAnswered(false);
         setAnswers(initialAnswer);
-        setStartTime(new Date());
     }
 
     // show form to input audio file

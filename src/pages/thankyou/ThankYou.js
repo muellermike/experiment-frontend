@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import "./ThankYou.css";
 
 function ThankYou() {
-    const globalState = useSelector(state => state.userInfoState);
+    const participationState = useSelector(state => state.participationState);
     const experimentState = useSelector(state => state.experimentState);
     
     // send endtime to API
@@ -14,17 +14,17 @@ function ThankYou() {
             mode: 'cors',
             method: 'PUT',
             headers: { 'Content-Type': 'application/json', 'X-API-KEY': process.env.REACT_APP_API_KEY_VALUE },
-            body: JSON.stringify({ user: globalState.userId, end: new Date().toISOString()})
+            body: JSON.stringify({ user: participationState.userId, end: new Date().toISOString()})
         };
 
         // update experiment to set end date
-        fetch(process.env.REACT_APP_API_BASE_URL + '/experiments/' + globalState.experimentId, requestOptions)
+        fetch(process.env.REACT_APP_API_BASE_URL + '/experiment-participations/' + participationState.participationId, requestOptions)
         .then(response => {
             return response.json();
         })
         .catch(function(err) {
         });
-    }, [globalState.userId, globalState.experimentId]);
+    }, [participationState.userId, participationState.participationId]);
 
     /*
     *   Show thank you text and redirection to Uni-Park with the ID.
@@ -42,7 +42,7 @@ function ThankYou() {
                                 <Card.Body>
                                     <p>To finish the experiment, <b>you have to answer some concluding questions.</b></p>
                                     <p>To do so, <b>click the button below.</b></p>
-                                    <Button variant="primary" href={process.env.REACT_APP_UNIPARK_RET_LINK + experimentState.experimentName + "/" + process.env.REACT_APP_UNIPARK_RET_LINK2 + "?return_tic=" + globalState.externalUserId}>Go to concluding questions</Button>
+                                    <Button variant="primary" href={process.env.REACT_APP_UNIPARK_RET_LINK + experimentState.experimentName + "/" + process.env.REACT_APP_UNIPARK_RET_LINK2 + "?return_tic=" + participationState.externalUserId}>Go to concluding questions</Button>
                                 </Card.Body>
                             </Card>
                         </Col>
