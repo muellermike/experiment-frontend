@@ -2,7 +2,6 @@ import "./Exercise.css";
 import { Col, Container, ProgressBar, Row } from "react-bootstrap";
 import ExercisePresentation from "../../components/ExercisePresentation/ExercisePresentation";
 import AnswerForm from "../../components/AnswerForm/AnswerForm";
-import ExperimentDescription from "../../components/ExperimentDescription/ExperimentDescription";
 import ImportantInformation from "../../components/ImportantInformation/ImportantInformation";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";

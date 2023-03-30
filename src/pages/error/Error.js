@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import "./Error.css";
 
 function Error() {
-    const globalState = useSelector(state => state.userInfoState);
+    const participationState = useSelector(state => state.participationState);
     const imageState = useSelector(state => state.imageState);
     
     /*
@@ -22,7 +22,7 @@ function Error() {
                                 <Card.Body>
                                     <p>Either restart the experiment with the button bellow or go back to the Survey Page.</p>
                                     <p>Another opportunity is to write an email to me.</p>
-                                        <Button variant="primary" href={"/?img_tm=" + imageState.imageTime + "&id_user=" + globalState.externalUserId}>Restart the experiment</Button>
+                                        <Button variant="primary" href={"/?img_tm=" + imageState.imageTime + "&id_user=" + participationState.externalUserId}>Restart the experiment</Button>
                                     <Button variant="secondary" href="mailto:mike.mueller@student.unisg.ch?subject=Experiment App not working properly">Write a mail</Button>
                                 </Card.Body>
                             </Card>

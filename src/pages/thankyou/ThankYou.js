@@ -31,9 +31,8 @@ function ThankYou() {
     */
     return (
         <div>
-            <h1>All rounds played</h1>
+            <h1>All rounds solved</h1>
             <div>
-                <p>We hope you had pleasure playing the game.</p>
                 <Container>
                     <Row>
                         <Col>
