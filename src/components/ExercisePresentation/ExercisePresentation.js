@@ -70,6 +70,7 @@ class ExercisePresentation extends React.Component {
         return (
             <div>
                 <Card>
+                    <p>{this.props.imageTopText}</p>
                     <Card.Img variant="top" className="Image-Dots" style={{ alignSelf: "center" }} src={this.props.image} /><br />
                     <Card.Body className="card-body-image">
                         <Card.Text dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(this.props.text)}}>

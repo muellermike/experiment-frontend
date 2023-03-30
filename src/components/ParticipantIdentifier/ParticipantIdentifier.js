@@ -72,12 +72,10 @@ function ParticipantIdentifier() {
                     return response.json();
                 })
                 .then(data => {
-                    alert("hallo");
                     dispatch(storeExperimentQuestions(data.questions));
                     navigate("/" + participationId + "/exercise")
                 })
                 .catch(function(err) {
-                    alert("warum?");
                     console.log(err);
                     navigate("/error");
                 });
