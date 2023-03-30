@@ -109,7 +109,6 @@ function Exercise() {
             <Container>
                 <Row>
                     <ImportantInformation></ImportantInformation>
-                    <ExperimentDescription></ExperimentDescription>
                 </Row>
                 <Row className="Container-Row">
                     <Col>
