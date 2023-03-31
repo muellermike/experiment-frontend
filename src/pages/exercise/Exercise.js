@@ -109,7 +109,7 @@ function Exercise() {
                 <Row>
                     <ImportantInformation></ImportantInformation>
                 </Row>
-                <Row className="Container-Row">
+                <Row id="progress-bar" className="Container-Row">
                     <Col>
                         <ProgressBar now={((count / process.env.REACT_APP_NUM_EX) * 100).toFixed(2)} label={((count / process.env.REACT_APP_NUM_EX) * 100).toFixed(2) + " %"}></ProgressBar>
                     </Col>

@@ -32,6 +32,12 @@ function AnswerForm(props) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        let element = document.getElementById('progress-bar');
+        if (element) {
+            // scroll smoothly to the top of the progress bar
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+
         props.onSubmit(answers);
         setAnswered(false);
         setAnswers(initialAnswer);
@@ -40,6 +46,7 @@ function AnswerForm(props) {
     // show form to input audio file
     return (
         <div>
+
             <Form className="vertical-center">
                 {props.questions.map((qg, ind) => (
                     <QuestionGroup id={`group-${ind}`} key={`group-${ind}`} groupKey={`group-${ind}`} group={qg} groupAnswerReceiver={receiveAnswer} image={props.image} text={props.text}></QuestionGroup>
