@@ -20,6 +20,16 @@ function AnswerForm(props) {
         setAnswered(true);
     }
 
+    // if answer is new then a new exercise is shown
+    // at this moment the UI scrolls to the top
+    if (answers.length === 0) {
+        let element = document.getElementById('progress-bar');
+        if (element) {
+            // scroll smoothly to the top of the progress bar
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
     const receiveAnswer = (value) => {
         if(answers.findIndex(item => item.answer.questionName === value.answer.questionName) !== -1) {
             setAnswers(prevArray => 
@@ -32,12 +42,6 @@ function AnswerForm(props) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        let element = document.getElementById('progress-bar');
-        if (element) {
-            // scroll smoothly to the top of the progress bar
-            element.scrollIntoView({ behavior: 'smooth' });
-        }
-
         props.onSubmit(answers);
         setAnswered(false);
         setAnswers(initialAnswer);

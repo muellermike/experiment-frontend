@@ -14,7 +14,7 @@ function ThankYou() {
             mode: 'cors',
             method: 'PUT',
             headers: { 'Content-Type': 'application/json', 'X-API-KEY': process.env.REACT_APP_API_KEY_VALUE },
-            body: JSON.stringify({ user: participationState.userId, end: new Date().toISOString()})
+            body: JSON.stringify({ end: new Date().toISOString()})
         };
 
         // update experiment to set end date
@@ -24,7 +24,7 @@ function ThankYou() {
         })
         .catch(function(err) {
         });
-    }, [participationState.userId, participationState.participationId]);
+    }, [participationState.participationId]);
 
     /*
     *   Show thank you text and redirection to Uni-Park with the ID.

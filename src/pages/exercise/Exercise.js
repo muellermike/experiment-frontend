@@ -48,7 +48,6 @@ function Exercise() {
 
     const handleSubmit = (answer) => {
         if(answer) {
-            console.log(answer);
             // POST answer
             const requestOptions = {
                 mode: 'cors',
