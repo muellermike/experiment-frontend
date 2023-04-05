@@ -91,11 +91,9 @@ function ParticipantIdentifier() {
     return (
         <div>
             <Card>
-                <Card.Title>Participate in the experiment</Card.Title>
                 <Card.Body>
-                    <p>This is the user interface in which the described experiment takes place. Please take your time to perform the experiment.</p>
-                    <p>To participate in the experiment, please choose next.</p>
-                    <Button variant="primary" style={{ margin: "25px"}} onClick={handleSumbit} type="submit">Next</Button>
+                    <p>On the following pages, you will see six business ideas. Please read the text on the left hand side carefully before you answer any of the questions.</p>
+                    <Button variant="primary" style={{ margin: "25px"}} onClick={handleSumbit} type="submit">Start</Button>
                 </Card.Body>
             </Card>
         </div>

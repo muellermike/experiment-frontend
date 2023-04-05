@@ -1,4 +1,4 @@
-# Getting Started with the Dots Estimation Experiment
+# Getting Started with the Experiment Plattform
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

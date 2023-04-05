@@ -15,7 +15,7 @@ function App() {
       </div>
       <footer className="App-footer">
         <p>
-          Thank you for your participation! Experiment provided by the University of St. Gallen and Mike Mueller © 2023.
+          Experiment provided by the University of St. Gallen © 2023.
         </p>
       </footer>
     </div>

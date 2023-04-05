@@ -56,7 +56,7 @@ function AnswerForm(props) {
                     <QuestionGroup id={`group-${ind}`} key={`group-${ind}`} groupKey={`group-${ind}`} group={qg} groupAnswerReceiver={receiveAnswer} image={props.image} text={props.text}></QuestionGroup>
                 ))}
                 <Button variant="primary" disabled={!isAnswered} type="submit" onClick={handleSubmit}>
-                    Next
+                    Next Venture
                 </Button>
             </Form>
             

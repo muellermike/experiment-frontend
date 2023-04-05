@@ -8,7 +8,7 @@ function Introduction() {
     */
     return (
         <div>
-            <h1>Welcome to the Experiment</h1>
+            <h3>Welcome to the Experiment</h3>
             <div>
                 <ParticipantIdentifier></ParticipantIdentifier>
             </div>
