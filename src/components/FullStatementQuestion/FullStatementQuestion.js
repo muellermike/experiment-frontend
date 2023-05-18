@@ -7,6 +7,8 @@ function FullStatementQuestion(props) {
     const [selectedValue, setSelectedValue] = useState(initialSelection);
     const [startTime, setStartTime] = useState(new Date());
 
+    let renderResult;
+
     useEffect(() => {
         setSelectedValue(initialSelection);
         setStartTime(new Date());
@@ -30,13 +32,48 @@ function FullStatementQuestion(props) {
         return checkboxId === selectedValue;
     };
 
-    // show form to input a full statement answer
-    return (
-        <div style={{marginTop: 15}}>
-            <p>{props.question.questionText}</p>
-                {
-                    props.question.answerType.type === "likert" ?
-                    ['1','2','3','4','5','6','7'].map((id) => (
+    switch(props.question.answerType.type) {
+        case "likert":
+            renderResult = ['1','2','3','4','5','6','7'].map((id) => (
+                id === '1' ? 
+                <Form.Check
+                    inline
+                    key={`likert-ansver-vlaue-${id}`}
+                    label={`${id} ${props.question.answerType.min}`}
+                    name={props.question.internalName}
+                    type="radio"
+                    id={`inline-radio-${id}-${props.questionKey}`}
+                    onChange={() => {handleClick(id)}}
+                    checked={isChecked(id)}
+                /> :
+                id === '7' ?
+                <Form.Check
+                    inline
+                    key={`likert-ansver-vlaue-${id}`}
+                    label={`${id} ${props.question.answerType.max}`}
+                    name={props.question.internalName}
+                    type="radio"
+                    id={`inline-radio-${id}-${props.questionKey}`}
+                    onChange={() => {handleClick(id)}}
+                    checked={isChecked(id)}
+                /> : 
+                <Form.Check
+                    inline
+                    key={`likert-ansver-vlaue-${id}`}
+                    label={`${id}`}
+                    name={props.question.internalName}
+                    type="radio"
+                    id={`inline-radio-${id}-${props.questionKey}`}
+                    onChange={() => {handleClick(id)}}
+                    checked={isChecked(id)}
+                />
+            ))
+            break;
+        case "percentage":
+            renderResult = <RangeQuestion max={props.question.answerType.max} min={props.question.answerType.min} handleSlide={handleClick} valueToShow={selectedValue}></RangeQuestion>
+            break;
+            case "binominal":
+                renderResult = renderResult = ['1','2',].map((id) => (
                     id === '1' ? 
                     <Form.Check
                         inline
@@ -48,7 +85,7 @@ function FullStatementQuestion(props) {
                         onChange={() => {handleClick(id)}}
                         checked={isChecked(id)}
                     /> :
-                    id === '7' ?
+                    id === '2' ?
                     <Form.Check
                         inline
                         key={`likert-ansver-vlaue-${id}`}
@@ -69,10 +106,18 @@ function FullStatementQuestion(props) {
                         onChange={() => {handleClick(id)}}
                         checked={isChecked(id)}
                     />
-                )) : props.question.answerType.type === "percentage" ?
-                        <RangeQuestion max={props.question.answerType.max} min={props.question.answerType.min} handleSlide={handleClick} valueToShow={selectedValue}></RangeQuestion> :
-                <div>different</div>
-            }
+                ))
+                break;
+        default:
+            renderResult = <div>statement type unknown</div>
+            break;
+    }
+
+    // show form to input a full statement answer
+    return (
+        <div style={{marginTop: 15}}>
+            <p>{props.question.questionText}</p>
+            {renderResult}
         </div>
     )
 }
