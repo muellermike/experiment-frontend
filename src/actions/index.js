@@ -43,6 +43,15 @@ export const storeExpName = (expName) => {
     }
 }
 
+export const storeExperimentInformation = (expInfo) => {
+    return {
+        type: 'STORE_EXP_INFO',
+        data: {
+            experimentInfo: expInfo
+        }
+    }
+}
+
 export const releaseParticipationInfo = () => {
     return {
         type: 'RELEASE_PARTICIPATION_INFO'

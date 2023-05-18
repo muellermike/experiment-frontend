@@ -9,6 +9,11 @@ const experimentReducer = (state = initialState, action) => {
                 ...state,
                 experimentName: action.data.experimentName
             };
+        case "STORE_EXP_INFO":
+            return {
+                ...state,
+                experimentInfo: action.data.experimentInfo
+            }
         default:
             return state;
     }

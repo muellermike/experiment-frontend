@@ -2,10 +2,10 @@ import { useState, React, useEffect } from "react";
 import { Button, Card } from "react-bootstrap";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from 'react-redux';
-import { storeExternalUserId, storeParticipationId, storeImageTime, storeExpName, storeExperimentQuestions } from '../../actions';
+import { storeExternalUserId, storeParticipationId, storeImageTime, storeExpName, storeExperimentQuestions, storeExperimentInformation } from '../../actions';
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
-function ParticipantIdentifier() {
+function ExperimentIdentifier() {
 
     const useQuery = () => {
         return new URLSearchParams(useLocation().search);
@@ -15,6 +15,8 @@ function ParticipantIdentifier() {
     const [imgTime, setImgTime] = useState(undefined);
     const [expName, setExpName] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+    const [loadExpInfo, setloadExpInfo] = useState(false);
+    const [expInfo, setExpInfo] = useState(undefined);
     let navigate = useNavigate();
     const dispatch = useDispatch();
     let query = useQuery();
@@ -24,6 +26,7 @@ function ParticipantIdentifier() {
             dispatch(storeExternalUserId(extUserId));
             dispatch(storeImageTime(imgTime));
             dispatch(storeExpName(expName));
+            dispatch(storeExperimentInformation(expInfo));
             let participationId = 0;
             
             // POST experiment participation
@@ -76,6 +79,32 @@ function ParticipantIdentifier() {
                 });
         }
 
+        const loadExperimentInformation = () => {
+            
+            // GET experiment participation
+            const getRequestOptions = {
+                mode: 'cors',
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json', 'X-API-KEY': process.env.REACT_APP_API_KEY_VALUE }
+            }
+    
+            fetch(process.env.REACT_APP_API_BASE_URL + '/experiments/' + expName, getRequestOptions)
+                .then(response => {
+                    if(response.status !== 200) {
+                        throw new Error("Server Error");
+                    }
+    
+                    return response.json();
+                })
+                .then(data =>  {
+                    setloadExpInfo(false);
+                    setExpInfo(data);
+                })
+                .catch(function(err) {
+                    navigate("/error");
+                });
+        }
+
         if (query.get("id_user")) {
             setExtUserId(query.get("id_user"));
         }
@@ -86,10 +115,18 @@ function ParticipantIdentifier() {
             setExpName(query.get("exp_name"));
         }
 
+        if(!expInfo && expName !== "") {
+            setloadExpInfo(true);
+        }
+
         if (isLoading) {
             handleSumbit();
         }
-    }, [query, isLoading, dispatch, expName, extUserId, imgTime, navigate])
+
+        if(loadExpInfo) {
+            loadExperimentInformation();
+        }
+    }, [query, isLoading, dispatch, expName, extUserId, imgTime, navigate, expInfo, loadExpInfo])
 
     /*
     *   Form for the identification of a participant
@@ -98,7 +135,13 @@ function ParticipantIdentifier() {
         <div>
             <Card>
                 <Card.Body>
-                    <p>On the following pages, you will see six business ideas. Please read the text on the left hand side carefully before you answer any of the questions.</p>
+                    {
+                        expInfo ? 
+                            <p>{expInfo.introduction}</p> :
+                            loadExpInfo ? 
+                                <LoadingSpinner /> :
+                                <p>Please open the platform with a specific experiment.</p>
+                    }
                     <Button variant="primary" style={{ margin: "25px"}} disabled={isLoading} onClick={() => {setIsLoading(true)}} type="submit">
                         {isLoading ? <LoadingSpinner /> : "Start"}
                     </Button>
@@ -108,4 +151,4 @@ function ParticipantIdentifier() {
     )
 }
 
-export default ParticipantIdentifier;
+export default ExperimentIdentifier;
