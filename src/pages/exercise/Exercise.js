@@ -16,6 +16,7 @@ function Exercise() {
     const [count, setCount] = useState(1);
     const participationState = useSelector(state => state.participationState);
     const imageState = useSelector(state => state.imageState);
+    const experimentState = useSelector(state => state.experimentState);
 
     // lade die nächste "Aufgabe" über das API
 
@@ -108,11 +109,15 @@ function Exercise() {
                 <Row>
                     <ImportantInformation></ImportantInformation>
                 </Row>
+                {
+                experimentState.experimentInfo && experimentState.experimentInfo.numOfExercises > 1 ?    
                 <Row id="progress-bar" className="Container-Row">
                     <Col>
-                        <ProgressBar now={((count / process.env.REACT_APP_NUM_EX) * 100).toFixed(2)} label={((count / process.env.REACT_APP_NUM_EX) * 100).toFixed(2) + " %"}></ProgressBar>
+                        <ProgressBar now={((count / experimentState.experimentInfo?.numOfExercises) * 100).toFixed(2)} label={((count / experimentState.experimentInfo?.numOfExercises) * 100).toFixed(2) + " %"}></ProgressBar>
                     </Col>
                 </Row>
+                : <></>
+                }
                 <Row className="Container-Row">
                     <Col xs={12} sm={12} md={12} lg={6}>
                         <ExercisePresentation text={exercise.text?.text} image={"data:" + exercise.image?.mimeType + ";base64, " + exercise.image?.encodedString} imageTopText={exercise.image?.topText} imageDuration={imageState.imageTime} />

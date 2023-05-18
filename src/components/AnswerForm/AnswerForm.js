@@ -2,11 +2,13 @@ import "./AnswerForm.css";
 import { Button, Form } from "react-bootstrap";
 import { useState } from "react";
 import QuestionGroup from "../QuestionGroup/QuestionGroup";
+import { useSelector } from 'react-redux';
 
 function AnswerForm(props) {
     const initialAnswer = [];
     const [isAnswered, setAnswered] = useState(false);
     const [answers, setAnswers] = useState(initialAnswer);
+    const experimentState = useSelector(state => state.experimentState);
 
     const questionsLength = () => {
         let count = 0;
@@ -56,7 +58,7 @@ function AnswerForm(props) {
                     <QuestionGroup id={`group-${ind}`} key={`group-${ind}`} groupKey={`group-${ind}`} group={qg} groupAnswerReceiver={receiveAnswer} image={props.image} text={props.text}></QuestionGroup>
                 ))}
                 <Button variant="primary" disabled={!isAnswered} type="submit" onClick={handleSubmit}>
-                    Next Venture
+                    {experimentState.experimentInfo ? experimentState.experimentInfo.nextButtonText : "Next"}
                 </Button>
             </Form>
             
