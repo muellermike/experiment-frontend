@@ -72,42 +72,42 @@ function FullStatementQuestion(props) {
         case "percentage":
             renderResult = <RangeQuestion max={props.question.answerType.max} min={props.question.answerType.min} handleSlide={handleClick} valueToShow={selectedValue}></RangeQuestion>
             break;
-            case "binominal":
-                renderResult = renderResult = ['1','2',].map((id) => (
-                    id === '1' ? 
-                    <Form.Check
-                        inline
-                        key={`likert-ansver-vlaue-${id}`}
-                        label={`${id} ${props.question.answerType.min}`}
-                        name={props.question.internalName}
-                        type="radio"
-                        id={`inline-radio-${id}-${props.questionKey}`}
-                        onChange={() => {handleClick(id)}}
-                        checked={isChecked(id)}
-                    /> :
-                    id === '2' ?
-                    <Form.Check
-                        inline
-                        key={`likert-ansver-vlaue-${id}`}
-                        label={`${id} ${props.question.answerType.max}`}
-                        name={props.question.internalName}
-                        type="radio"
-                        id={`inline-radio-${id}-${props.questionKey}`}
-                        onChange={() => {handleClick(id)}}
-                        checked={isChecked(id)}
-                    /> : 
-                    <Form.Check
-                        inline
-                        key={`likert-ansver-vlaue-${id}`}
-                        label={`${id}`}
-                        name={props.question.internalName}
-                        type="radio"
-                        id={`inline-radio-${id}-${props.questionKey}`}
-                        onChange={() => {handleClick(id)}}
-                        checked={isChecked(id)}
-                    />
-                ))
-                break;
+        case "binominal":
+            renderResult = renderResult = ['1','2',].map((id) => (
+                id === '1' ? 
+                <Form.Check
+                    inline
+                    key={`likert-ansver-vlaue-${id}`}
+                    label={`${props.question.answerType.min}`}
+                    name={props.question.internalName}
+                    type="radio"
+                    id={`inline-radio-${id}-${props.questionKey}`}
+                    onChange={() => {handleClick(id)}}
+                    checked={isChecked(id)}
+                /> :
+                id === '2' ?
+                <Form.Check
+                    inline
+                    key={`likert-ansver-vlaue-${id}`}
+                    label={`${props.question.answerType.max}`}
+                    name={props.question.internalName}
+                    type="radio"
+                    id={`inline-radio-${id}-${props.questionKey}`}
+                    onChange={() => {handleClick(id)}}
+                    checked={isChecked(id)}
+                /> : 
+                <Form.Check
+                    inline
+                    key={`likert-ansver-vlaue-${id}`}
+                    label={`${id}`}
+                    name={props.question.internalName}
+                    type="radio"
+                    id={`inline-radio-${id}-${props.questionKey}`}
+                    onChange={() => {handleClick(id)}}
+                    checked={isChecked(id)}
+                />
+            ))
+            break;
         default:
             renderResult = <div>statement type unknown</div>
             break;
