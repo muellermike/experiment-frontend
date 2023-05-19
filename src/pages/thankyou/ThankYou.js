@@ -2,11 +2,18 @@ import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import { useSelector } from 'react-redux';
 import { useEffect } from "react";
 import "./ThankYou.css";
+import DOMPurify from "dompurify";
 
 function ThankYou() {
     const participationState = useSelector(state => state.participationState);
     const experimentState = useSelector(state => state.experimentState);
     
+    let finalPage = JSON.parse(experimentState.experimentInfo?.finalPage);
+
+    console.log("FINAL PAGE");
+    console.log(experimentState.experimentInfo?.finalPage);
+    console.log(finalPage?.sectionTitle);
+
     // send endtime to API
     useEffect(() => {
 
@@ -31,17 +38,18 @@ function ThankYou() {
     */
     return (
         <div>
-            <h1>All rounds solved</h1>
+            <h1>{finalPage ? finalPage.header : "All rounds played"}</h1>
             <div>
                 <Container>
                     <Row>
                         <Col>
                             <Card>
-                                <Card.Title>Concluding questions</Card.Title>
+                                <Card.Title>{finalPage?.sectionTitle}</Card.Title>
                                 <Card.Body>
-                                    <p>To finish the experiment, <b>you have to answer some concluding questions.</b></p>
-                                    <p>To do so, <b>click the button below.</b></p>
-                                    <Button variant="primary" href={process.env.REACT_APP_UNIPARK_RET_LINK + experimentState.experimentName + "/" + process.env.REACT_APP_UNIPARK_RET_LINK2 + "?return_tic=" + participationState.externalUserId}>Go to concluding questions</Button>
+                                    <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(finalPage?.instructions)}}></p>
+                                    <Button variant="primary" href={process.env.REACT_APP_UNIPARK_RET_LINK + experimentState.experimentName + "/" + process.env.REACT_APP_UNIPARK_RET_LINK2 + "?return_tic=" + participationState.externalUserId}>
+                                        {finalPage ? finalPage.actionText : "Go to concluding questions"}
+                                    </Button>
                                 </Card.Body>
                             </Card>
                         </Col>

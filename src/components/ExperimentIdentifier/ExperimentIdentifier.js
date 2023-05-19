@@ -26,6 +26,8 @@ function ExperimentIdentifier() {
             dispatch(storeExternalUserId(extUserId));
             dispatch(storeImageTime(imgTime));
             dispatch(storeExpName(expName));
+            console.log("STORE EXP INFO");
+            console.log(expInfo);
             dispatch(storeExperimentInformation(expInfo));
             let participationId = 0;
             
