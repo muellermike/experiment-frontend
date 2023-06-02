@@ -120,7 +120,7 @@ function Exercise() {
                 }
                 <Row className="Container-Row">
                     <Col xs={12} sm={12} md={12} lg={6}>
-                        <ExercisePresentation text={exercise.text?.text} image={"data:" + exercise.image?.mimeType + ";base64, " + exercise.image?.encodedString} imageTopText={exercise.image?.topText} imageDuration={imageState.imageTime} />
+                        <ExercisePresentation text={exercise.text?.text} image={"data:" + exercise.image?.mimeType + ";base64, " + exercise.image?.encodedString} imageTopText={exercise.image?.topText} imageSize={exercise.image?.maxImageSize} imageDuration={imageState.imageTime} />
                     </Col>
                     <Col className="Container-Col">
                         <div className="Answer-Part">
